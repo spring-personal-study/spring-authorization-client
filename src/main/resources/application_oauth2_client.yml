@@ -1,0 +1,21 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration: # 클라이언트 설정
+          bluebird:
+            clientId: bluebird-client
+            clientSecret: 1234
+            clientName: bluebird-client
+            redirectUri: http://127.0.0.1:8081
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: client_secret_basic,post
+            scope: openid,profile,email,read,write,photo
+        provider: # 공급자 설정
+          bluebird:
+            issuerUri: http://127.0.0.1:9000
+            jwk-set-uri: http://127.0.0.1:9000/oauth2/openid-connect/token
+            authorizationUri: http://127.0.0.1:9000/oauth2/authorize
+            tokenUri: http://127.0.0.1:9000/oauth2/token
+            userInfoUri: http://127.0.0.1:9000/oauth2/userinfo
+            userNameAttribute: sub
