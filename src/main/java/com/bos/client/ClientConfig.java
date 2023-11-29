@@ -20,8 +20,8 @@ public class ClientConfig {
                     authorize.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
                     authorize.anyRequest().authenticated();
                 });
-        http.oauth2Login((oauth2) -> oauth2.defaultSuccessUrl("/")); // <1> 인가처리만 해줌
-        http.oauth2Client(Customizer.withDefaults()); // <2> 인가처리 및 엔드유저의 인증처리도 포함
+        http.oauth2Login((oauth2) -> oauth2.defaultSuccessUrl("/"));
+        http.oauth2Client(Customizer.withDefaults());
 
         return http.build();
     }

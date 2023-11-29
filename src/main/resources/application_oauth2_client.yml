@@ -5,7 +5,7 @@ spring:
         registration: # 클라이언트 설정
           bluebird:
             clientId: bluebird-client
-            clientSecret: 1234
+            #clientSecret: 1234
             clientName: bluebird-client
             redirectUri: http://127.0.0.1:8081
             authorizationGrantType: authorization_code
