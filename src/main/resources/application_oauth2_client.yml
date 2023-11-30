@@ -9,12 +9,12 @@ spring:
             clientName: bluebird-client
             redirect-uri: http://127.0.0.1:8081
             authorization-grant-type: authorization_code
-            #client-authentication-method: client_secret_basic,client_secret_post
+            client-authentication-method: client_secret_basic,post
             scope: openid,profile,email,read,write,photo
         provider: # 공급자 설정
           bluebird:
             issuer-uri: http://127.0.0.1:9000
-            jwk-set-uri: http://127.0.0.1:9000/oauth2/openid-connect/token
+            jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
             authorization-uri: http://127.0.0.1:9000/oauth2/authorize
             token-uri: http://127.0.0.1:9000/oauth2/token
             user-info-uri: http://127.0.0.1:9000/oauth2/userinfo

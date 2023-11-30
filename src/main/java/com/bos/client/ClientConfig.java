@@ -27,7 +27,6 @@ public class ClientConfig {
                 });
         http.oauth2Login((oauth2) -> oauth2.defaultSuccessUrl("/"));
         http.oauth2Client(Customizer.withDefaults());
-
         return http.build();
     }
 
