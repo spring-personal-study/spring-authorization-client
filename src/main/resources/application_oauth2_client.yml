@@ -2,16 +2,16 @@ spring:
   security:
     oauth2:
       client:
-        registration: # 클라이언트 설정
+        registration:
           bluebird:
-            clientId: bluebird-client
-            clientSecret: 1234
-            clientName: bluebird-client
+            clientId: bluebird-default-client
+            clientSecret: $2a$12$tDI3S/mBdAYYEy3O.tHvFuHrsDz..QrDNtcMaQPDlLHI23tkkp4dO # bluebird-default-client-secret * 5
+            clientName: bluebird-default-client
             redirect-uri: http://127.0.0.1:8081
             authorization-grant-type: authorization_code
-            client-authentication-method: client_secret_basic,post
-            scope: openid,profile,email,read,write,photo
-        provider: # 공급자 설정
+            client-authentication-method: client_secret_basic,client_secret_post,post
+            scope: client.read,client.write
+        provider:
           bluebird:
             issuer-uri: http://127.0.0.1:9000
             jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
