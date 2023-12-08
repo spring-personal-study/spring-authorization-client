@@ -21,10 +21,8 @@ public class ClientConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
-                (authorize) -> {
-                    authorize.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
-                    authorize.anyRequest().authenticated();
-                });
+                (authorize) -> authorize.requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+                        .anyRequest().authenticated());
         http.oauth2Login((oauth2) -> oauth2.defaultSuccessUrl("/"));
         http.oauth2Client(Customizer.withDefaults());
         return http.build();
@@ -36,18 +34,17 @@ public class ClientConfig {
     }
 
     @Bean
-    public DefaultOAuth2AuthorizedClientManager authorizedClientManager(ClientRegistrationRepository clientRegistrationRepository,
-                                                                        OAuth2AuthorizedClientRepository authorizedClientRepository) {
-
+    public DefaultOAuth2AuthorizedClientManager authorizedClientManager(
+            ClientRegistrationRepository clientRegistrationRepository,
+            OAuth2AuthorizedClientRepository authorizedClientRepository
+    ) {
         OAuth2AuthorizedClientProvider authorizedClientProvider =
                 OAuth2AuthorizedClientProviderBuilder.builder()
                         .authorizationCode()
                         .refreshToken()
                         .build();
 
-        DefaultOAuth2AuthorizedClientManager authorizedClientManager =
-                new DefaultOAuth2AuthorizedClientManager(
-                        clientRegistrationRepository, authorizedClientRepository);
+        DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientRepository);
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
 
         return authorizedClientManager;
