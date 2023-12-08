@@ -6,16 +6,16 @@ spring:
           bluebird:
             clientId: bluebird-default-client
             clientSecret: $2a$12$tDI3S/mBdAYYEy3O.tHvFuHrsDz..QrDNtcMaQPDlLHI23tkkp4dO # bluebird-default-client-secret * 5
-            clientName: bluebird-default-client
+            clientName: bluebird-default-client-name
             redirect-uri: http://127.0.0.1:8081
             authorization-grant-type: authorization_code
-            client-authentication-method: client_secret_basic,client_secret_post,post
-            scope: openid,client.read,client.write
+            client-authentication-method: client_secret_basic,client_secret_post
+            scope: openid,client.read,client.write,client.create
         provider:
           bluebird:
             issuer-uri: http://127.0.0.1:9000
             jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
             authorization-uri: http://127.0.0.1:9000/oauth2/authorize
             token-uri: http://127.0.0.1:9000/oauth2/token
-            user-info-uri: http://127.0.0.1:9000/oauth2/userinfo
+            user-info-uri: http://127.0.0.1:9000/userinfo
             user-name-attribute: sub
