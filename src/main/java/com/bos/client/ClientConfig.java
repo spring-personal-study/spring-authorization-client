@@ -1,10 +1,12 @@
 package com.bos.client;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProvider;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -22,8 +24,10 @@ public class ClientConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 (authorize) -> authorize.requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated());
-        http.oauth2Login((oauth2) -> oauth2.defaultSuccessUrl("/"));
+        http.oauth2Login((oauth2) ->
+                oauth2.defaultSuccessUrl("/"));
         http.oauth2Client(Customizer.withDefaults());
         return http.build();
     }
