@@ -16,13 +16,72 @@
     </style>
 </head>
 <body>
-<div class="box" onclick="redirectToBluebird()">
-    <span>Bluebird Login</span>
+
+
+<div sec:authorize="isAnonymous()">
+    <div class="box" onclick="redirectToBluebird()">
+        <span>Bluebird Login</span>
+    </div>
 </div>
 
+<div sec:authorize="isFullyAuthenticated()">
+    <div>Welcome</div>
+    <a th:href="@{/logout}">Logout</a>
+    <form action="#">
+        <p><input type="button" onclick="photos()" value="Photos"/>
+        <p><input type="button" onclick="remotePhotos()" value="Remote Photos"/>
+    </form>
+    <div id="photos"></div>
+    <p></p>
+    <div id="remotePhotos"></div>
+</div>
 <script>
     function redirectToBluebird() {
         window.location.href = "/oauth2/authorization/bluebird";
+    }
+</script>
+<script>
+    function remotePhotos() {
+        fetch("http://127.0.0.1:8082/remotePhotos", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("access_token")
+            }
+        })
+            .then(response => {
+                response.json().then(function (data) {
+                    for (const prop in data) {
+                        document.querySelector("#remotePhotos").append(data[prop].userId);
+                        document.querySelector("#remotePhotos").append(data[prop].photoId);
+                        document.querySelector("#remotePhotos").append(data[prop].photoTitle);
+                        document.querySelector("#remotePhotos").append(data[prop].photoDescription);
+                        document.querySelector("#remotePhotos").append(document.createElement('br'));
+                    }
+                })
+            })
+    }
+
+    function photos() {
+        fetch("/photos?token=" + localStorage.getItem("access_token"),
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => {
+                response.json().then(function (data) {
+                    console.log(data)
+                    for (const prop in data) {
+                        document.querySelector("#photos").append(data[prop].userId);
+                        document.querySelector("#photos").append(data[prop].photoId);
+                        document.querySelector("#photos").append(data[prop].photoTitle);
+                        document.querySelector("#photos").append(data[prop].photoDescription);
+                        document.querySelector("#photos").append(document.createElement('br'));
+                    }
+                })
+            })
+            .catch((error) => console.log("error:", error));
     }
 </script>
 </body>
