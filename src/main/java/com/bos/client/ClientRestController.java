@@ -28,18 +28,7 @@ public class ClientRestController {
         return client.getAccessToken();
     }
 
-    @GetMapping("/photos")
-    public List<Photo> photos(AccessToken accessToken) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken.getToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
 
-        String url = "http://127.0.0.1:8082/photos";
-
-        ResponseEntity<List<Photo>> response = restTemplate.exchange(url, HttpMethod.GET, entity, new ParameterizedTypeReference<>() {});
-
-        return response.getBody();
-    }
 
 //    @GetMapping("/token-expire")
 //    public Map<String, Object> tokenExpire(AccessToken accessToken) {
