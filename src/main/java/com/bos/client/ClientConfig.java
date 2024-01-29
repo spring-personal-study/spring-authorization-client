@@ -25,8 +25,7 @@ public class ClientConfig {
                 (authorize) -> authorize.requestMatchers(new AntPathRequestMatcher("/")).permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated());
-        http.oauth2Login((oauth2) ->
-                oauth2.defaultSuccessUrl("/oauth/consent"));
+        http.oauth2Login((oauth2) -> oauth2.defaultSuccessUrl("/login"));
         http.oauth2Client(Customizer.withDefaults());
         return http.build();
     }
