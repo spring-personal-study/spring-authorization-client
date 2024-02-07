@@ -29,48 +29,4 @@ public class ClientRestController {
         return client.getAccessToken();
     }
 
-
-
-//    @GetMapping("/token-expire")
-//    public Map<String, Object> tokenExpire(AccessToken accessToken) {
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken.getToken());
-//        HttpEntity<?> entity = new HttpEntity<>(headers);
-//
-//        String url = "http://127.0.0.1/token-expire";
-//        ResponseEntity<Map<String, Object>> response = restTemplate.exchange(url, HttpMethod.GET, entity, new ParameterizedTypeReference<>() {
-//        });
-//
-//        return response.getBody();
-//    }
-//
-//    @GetMapping("new-access-token")
-//    public OAuth2AccessToken newAccessToken(OAuth2AuthenticationToken authentication, HttpServletRequest request, HttpServletResponse response){
-//
-//        OAuth2AuthorizedClient authorizedClient
-//                = authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
-//
-//        if (authorizedClient != null && authorizedClient.getRefreshToken() != null) {
-//            ClientRegistration clientRegistration = ClientRegistration.withClientRegistration
-//                            (authorizedClient.getClientRegistration()).authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-//                    .build();
-//
-//            OAuth2AuthorizedClient oAuth2AuthorizedClient =
-//                    new OAuth2AuthorizedClient(clientRegistration, authorizedClient.getPrincipalName(),
-//                            authorizedClient.getAccessToken(),authorizedClient.getRefreshToken());
-//
-//            OAuth2AuthorizeRequest oAuth2AuthorizeRequest =
-//                    OAuth2AuthorizeRequest.withAuthorizedClient(oAuth2AuthorizedClient)
-//                            .principal(authentication)
-//                            .attribute(HttpServletRequest.class.getName(), request)
-//                            .attribute(HttpServletResponse.class.getName(), response)
-//                            .build();
-//
-//            authorizedClient = oAuth2AuthorizedClientManager.authorize(oAuth2AuthorizeRequest);
-//        }
-//
-//        return authorizedClient.getAccessToken();
-//    }
-
 }
