@@ -4,18 +4,13 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 <head>
     <meta charset="UTF-8">
-    <title>Bluebird Login</title>
-    <style>
-        .box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            display: inline-block;
-            cursor: pointer;
-            background-color: steelblue;
-        }
-    </style>
+    <title>Home</title>
 </head>
 <body>
+    <h1>OAuth2 Client</h1>
+    <a href="/oauth2/authorization/new-client">Login with New Client</a>
+</body>
+</html>
 
 
 <div sec:authorize="isAnonymous()">
@@ -30,8 +25,18 @@
 </div>
 <script>
     function redirectToBluebird() {
-        window.location.href = "/oauth2/authorization/bluebird";
+        const width = 600;
+        const height = 700;
+        const left = (screen.width / 2) - (width / 2);
+        const top = (screen.height / 2) - (height / 2);
+        window.open('/oauth2/authorization/bluebird', '_blank', `width=${width},height=${height},top=${top},left=${left}`);
     }
+
+    window.addEventListener('message', function(event) {
+        if (event.data === 'loginSuccess') {
+            window.location.reload();
+        }
+    });
 </script>
 </body>
 </html>

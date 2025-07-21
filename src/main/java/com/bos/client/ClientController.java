@@ -8,12 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ClientController {
 
-/*
     @GetMapping("/")
     public String index() {
         return "index";
     }
-*/
+
+    @GetMapping("/login-redirect")
+    public String loginRedirect() {
+        return "login_redirect";
+    }
 
     @GetMapping("/home")
     public String home() {

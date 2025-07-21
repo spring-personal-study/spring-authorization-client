@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Redirect</title>
+</head>
+<body>
+<script>
+    window.opener.postMessage('loginSuccess', '*');
+    window.close();
+</script>
+</body>
+</html>
